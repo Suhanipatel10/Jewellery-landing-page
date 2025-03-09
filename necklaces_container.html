@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Store</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Allura&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background-color: #f0efec;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+        .header1{
+            text-align: center;
+            background-color: #d4e5c6;
+            color: black;
+            font-size: 20px;
+            padding-top: 0.02px;
+            padding-bottom: 0.02px;
+        }
+        .header3{
+            display: flex;  
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f0efec;
+        }
+        .logo img {
+            height: 80px;
+            width: 110%;
+        }
+        .nav {
+            display: flex;
+            list-style: none;
+            padding: 10px;
+            margin-left: 50px;
+            margin-right: auto;
+        }
+        .nav > li {
+            position: relative;
+            margin-left: 20px;
+        }
+        .nav a {
+            font-size: 17px;
+            font-family: 'Arial';
+            text-decoration: none;
+            color: #080000;
+            text-transform: uppercase;
+            padding: 10px;
+            position: relative;
+            display: block;
+            transition: color 0.3s;
+        }
+        .nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: #117548;
+            transition: width 0.3s;
+        }
+        .nav a:hover::after {
+            width: 100%;
+        }
+        .nav a:hover {
+            color: #278f60;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #444;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-menu a {
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #555;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            white-space: nowrap;
+        }
+        .dropdown-menu a {
+            color: #0d0000;
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+        .nav > li:hover .dropdown-menu {
+            display: block;
+        }
+        .nav-right {
+            display: flex;
+            gap: 30px;
+            margin-right: 40px;
+        }
+        .nav-right a {
+            color: black; /* Add this line */
+            text-decoration: none;
+            font-size:25px;
+            padding: 5px;
+        }
+        .nav-icon {
+            font-size: 30px; 
+            stroke-width: 1;
+        }
+
+        .icon-heart {
+            position: absolute;
+            left: 86%;
+            top:3%;
+        }
+
+        .icon-heart .fa-heart-o {
+            font-size: 30px;
+            color: #333; /* Adjust color as needed */
+            padding: 5px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .icon-heart .fa-heart-o:hover:before {
+            content: "\f004"; /* Unicode for a filled heart */
+            color: #ff69b4; /* Fill color */
+        }
+        .icon-heart .fa-heart-o.active {
+            content: "\f004";
+            color: #ff69b4; /* Fill color */
+        }
+        .bestseller-section {
+            position: relative;
+            padding: 5px;
+            justify-content: center;
+            overflow: visible;
+        }
+        .best {
+            display: flex;
+            gap: 10px; /* Small gap between images */
+        }
+        
+        .bestseller {
+            position: relative;
+            overflow: visible;
+            margin-left: 20px;
+            margin-right:30px;
+            margin-bottom: 60px;
+        }
+        
+        .bestseller .main-image {
+            width: 415px;
+            height: 450px;
+            object-fit: cover;
+        }
+        .bestseller .hover-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 415px;
+            height: 450px;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .bestseller:hover .hover-image {
+            opacity: 1;
+        }
+        .bestseller:hover .plus-icon{
+            color: white;
+        }
+        .bestseller:hover .fa-heart{
+            color: white;
+        }
+        .icon-heart {
+            position: absolute;
+            left: 86%;
+            top: 3%;
+        }
+        .icon-heart .fa-heart {
+            font-size: 30px;
+            color: black; 
+            padding: 5px;
+            cursor: pointer;
+            transition: color 0.3s; 
+        }
+
+        .icon-heart .fa-heart:hover {
+            color: #ff69b4; 
+        }
+        
+        .icon-heart .fa-heart.filled {
+            color: red; 
+        }
+        .bestseller p {
+            color: rgb(1, 0, 0);
+            font-size: 20px;
+            margin-top: 10px;
+            line-height: 0.3; 
+        }
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #f0efec;
+            border: 2px solid rgb(224, 217, 217);
+            border-radius: 20px; 
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: rgb(224, 217, 217);
+        }
+
+        .bestseller-section .best:not(:first-child) {
+            margin-top: 50px; 
+        }
+        
+        .offer-section2 {
+            display: flex;
+            margin-top: 150px;
+            margin-bottom: 0;
+        }
+        #myVideo1 {
+            width: 120%;
+            height: 1000px;
+            object-fit: cover;
+        }
+        .content1 {
+            background-color: #d4e5c6;
+            text-align: center;
+            padding: 50px 20px;
+            margin-bottom: 100px;
+        }
+
+        .content1 h1 {
+            font-size: 2em;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        .content1 p {
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+        .footer {
+            background-color: #070000;
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+        }
+        .footer .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1700px;
+            margin: 0 auto;
+        }
+        .footer .footer-content div {
+            flex: 1;
+            margin: 10px;
+            min-width: 200px;
+        }
+        .footer .footer-content h3 {
+            margin-top: 0;
+            font-size: 20px;
+            color: #0e5830;
+        }
+        .footer .footer-content p, .footer .footer-content a {
+            font-size: 20px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .footer .footer-content a {
+            display: block;
+            margin: 5px 0;
+        }
+        .footer .footer-logo {
+            text-align: center;
+        }
+        .footer .footer-logo img {
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header1">
+        <p>Free shipping on all orders above 1500/-</p>
+    </header>
+    <header class="header3">
+        <div class="logo">
+            <img src="l1.png" alt="Jewellery Store Logo">
+        </div>
+        <nav class="nav">
+            <a href="home.html">Home</a>
+            <li>
+                <a href="#">Items</a>
+                <div class="dropdown-menu">
+                    <a href="rings_container.html">Rings</a>
+                    <a href="earrings_container.html">earrings</a>
+                    <a href="bracelets_container.html">Bracelets</a>
+                    <a href="necklaces_container.html">Necklace</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">Giftings</a>
+                <div class="dropdown-menu">
+                    <a href="gift_boxes.html">Gift Boxes</a>
+                    <a href="pairs.html">Pair Things</a>
+                </div>
+            </li>
+            <li>
+                <a href="sets.html">Sets</a>
+            </li>
+            <li>
+                <a href="login.php">Login</a>
+            </li>
+        </nav>
+        <div class="nav-right">
+            
+            <a href="cart.html" class="nav-icon">
+                <i class="fa fa-shopping-cart"></i>
+            </a>
+            <a href="dashboard.html" class="nav-icon">
+                <i class="fa fa-user"></i>
+            </a>
+        </div>
+    </header>
+    <hr style="border: 1px solid #ddd; margin: 0px;">
+    <p style="font-size: 40px; margin-left: 30px; margin-top: 10px; margin-bottom: 10px; font-family: 'Open Sans';">Rings</p>
+    <hr style="border: 1px solid #ddd; margin: 20px 0;">
+    
+    <div class="bestseller-section">
+        <div class="best">
+            <a style="text-decoration: none;" href="rings.html" class="bestseller">
+                <img src="nc1.jpg" alt="earring1" class="main-image">
+                <img src="nc1_h.jpg" alt="earring1" class="hover-image">
+                <div class="icon-heart">
+                    <i class="fa fa-heart-o" id="heart-icon-1" data-item-id="1" onclick="toggleWishlist(this)"></i>
+                </div>
+                <p>18k gold ring, rose gold</p>
+                <p>rings</p>
+                <p>5000/-</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Earring1', 1200, 'e1.jpg')">Add to Cart</button>
+            </a>
+            <a style="text-decoration: none;" href="necklaces.html" class="bestseller">
+                <img src="nc2.jpg" alt="earring2" class="main-image">
+                <img src="nc2_h.jpg" alt="earring2" class="hover-image">
+                <div class="icon-heart">
+                    <i class="fa fa-heart-o"></i>
+                </div>
+                
+                <p>18k gold ring, rose gold</p>
+                <p>rings</p>
+                <p>5000/-</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Earring2', 1200, 'e2.jpg')">Add to Cart</button>
+            </a>
+            <a style="text-decoration: none;" href="earrings.html" class="bestseller">
+                <img src="nc3.jpg" alt="earring3" class="main-image">
+                <img src="nc3_h.jpg" alt="earring3" class="hover-image">
+                <div class="icon-heart">
+                    <i class="fa fa-heart-o"></i>
+                </div>
+                
+                <p>18k gold ring, rose gold</p>
+                <p>rings</p>
+                <p>5000/-</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Earring3', 1200, 'e3.jpg')">Add to Cart</button>
+            </a>
+            <a style="text-decoration: none;" href="bracelets.html" class="bestseller">
+                <img src="nc4.jpg" alt="earring4" class="main-image">
+                <img src="nc4_h.jpg" alt="earring4" class="hover-image">
+                <div class="icon-heart">
+                    <i class="fa fa-heart-o"></i>
+                </div>
+                
+                <p>18k gold ring, rose gold</p>
+                <p>rings</p>
+                <p>5000/-</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Earring4', 1200, 'e4.jpg')">Add to Cart</button>
+            </a>
+        </div>
+        <div class="best">
+            <a style="text-decoration: none;" href="rings.html" class="bestseller">
+                <img src="nc5.jpg" alt="earring5" class="main-image">
+                <img src="nc5_h.jpg" alt="earring5" class="hover-image">
+                <div class="icon-heart">
+                    <i class="fa fa-heart-o"></i>
+                </div>
+                
+                <p>18k gold ring, rose gold</p>
+                <p>rings</p>
+                <p>5000/-</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Earring5', 1200, 'e5.jpg')">Add to Cart</button>
+            </a>
+            <a style="text-decoration: none;" href="necklaces.html" class="bestseller">
+                <img src="nc6.jpg" alt="Necklaces" class="main-image">
+                <img src="nc6_h.jpg" alt="Rings Hover" class="hover-image">
+                <div class="icon-heart">
+                    <i class="fa fa-heart-o"></i>
+                </div>
+                
+                <p>18k gold ring, rose gold</p>
+                <p>rings</p>
+                <p>5000/-</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Earring6', 1200, 'e6.jpg')">Add to Cart</button>
+            </a>
+            <a style="text-decoration: none;" href="earrings.html" class="bestseller">
+                <img src="nc7.jpg" alt="Earrings" class="main-image">
+                <img src="nc7_h.jpg" alt="Rings Hover" class="hover-image">
+                <div class="icon-heart">
+                    <i class="fa fa-heart-o"></i>
+                </div>
+                
+                <p>18k gold ring, rose gold</p>
+                <p>rings</p>
+                <p>5000/-</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Earring7', 1200, 'e7.jpg')">Add to Cart</button>
+            </a>
+            <a style="text-decoration: none;" href="bracelets.html" class="bestseller">
+                <img src="nc8.jpg" alt="Bracelets" class="main-image">
+                <img src="nc8_h.jpg" alt="Rings Hover" class="hover-image">
+                <div class="icon-heart">
+                    <i class="fa fa-heart-o"></i>
+                </div>
+                
+                <p>18k gold ring, rose gold</p>
+                <p>rings</p>
+                <p>5000/-</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Earring8', 1200, 'e8.jpg')">Add to Cart</button>
+            </a>
+        </div>
+        <div class="best">
+            <a style="text-decoration: none;" href="rings.html" class="bestseller">
+                <img src="nc9.jpg" alt="earring5" class="main-image">
+                <img src="nc9_h.jpg" alt="earring5" class="hover-image">
+                <div class="icon-heart">
+                    <i class="fa fa-heart-o"></i>
+                </div>
+                
+                <p>18k gold ring, rose gold</p>
+                <p>rings</p>
+                <p>5000/-</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Earring5', 1200, 'e5.jpg')">Add to Cart</button>
+            </a>
+            <a style="text-decoration: none;" href="necklaces.html" class="bestseller">
+                <img src="nc10.jpg" alt="Necklaces" class="main-image">
+                <img src="nc10_h.jpg" alt="Rings Hover" class="hover-image">
+                <div class="icon-heart">
+                    <i class="fa fa-heart-o"></i>
+                </div>
+                
+                <p>18k gold ring, rose gold</p>
+                <p>rings</p>
+                <p>5000/-</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Earring6', 1200, 'e6.jpg')">Add to Cart</button>
+            </a>
+            <a style="text-decoration: none;" href="earrings.html" class="bestseller">
+                <img src="nc11.jpg" alt="Earrings" class="main-image">
+                <img src="nc11_h.jpg" alt="Rings Hover" class="hover-image">
+                <div class="icon-heart">
+                    <i class="fa fa-heart-o"></i>
+                </div>
+                
+                <p>18k gold ring, rose gold</p>
+                <p>rings</p>
+                <p>5000/-</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Earring7', 1200, 'e7.jpg')">Add to Cart</button>
+            </a>
+            <a style="text-decoration: none;" href="bracelets.html" class="bestseller">
+                <img src="nc12.jpg" alt="Bracelets" class="main-image">
+                <img src="nc12_h.jpg" alt="Rings Hover" class="hover-image">
+                <div class="icon-heart">
+                    <i class="fa fa-heart-o"></i>
+                </div>
+                
+                <p>18k gold ring, rose gold</p>
+                <p>rings</p>
+                <p>5000/-</p>
+                <button class="add-to-cart-btn" onclick="addToCart('Earring8', 1200, 'e8.jpg')">Add to Cart</button>
+            </a>
+        </div>
+    </div>
+    
+    <div class="offer-section2">
+        <video id="myVideo1" width="100%" height="100%" loop autoplay muted>
+            <source src="necklace.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video> 
+    </div>
+    <div class="content1">
+        <h1>Moonlight jewels x The lifetime bond</h1>
+        <p>Celebrate the magic of love with our exclusive bridal collection in collaboration with The Bridal Journey, featuring timeless pieces adorned with freshwater baroque and button pearls.</p>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="logo2.png" alt="Jewelry Store Footer Logo">
+            </div>
+            <div>
+                <h3>Contact Us</h3>
+                <p>Email: info@jewelrystore.com</p>
+                <p>Phone: +123 456 7890</p>
+            </div>
+            <div>
+                <h3>Customer Service</h3>
+                <a href="faq.html">FAQs</a>
+                <a href="return.html">Return Policy</a>
+                <a href="shipping.html">Shipping Information</a>
+            </div>
+            <div>
+                <h3>Follow Us</h3>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("leftarrow").addEventListener("click", function() {scrollCategories('left');});
+        document.getElementById("rightarrow").addEventListener("click", function() {scrollCategories('right');});
+        var container = document.getElementById('categoryContainer');
+        function scrollCategories(direction) {
+            if (direction === 'left') {
+                container.scrollBy({
+                    left: -100, 
+                    behavior: 'smooth'
+                });
+            } else if (direction === 'right') {
+                container.scrollBy({
+                    left: 100, 
+                    behavior: 'smooth'
+                });
+            }
+        }
+        function addToCart(productName, price, imagePath) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let product = {
+                name: productName,
+                price: price,
+                quantity: 1,
+                subtotal: price,
+                image: imagePath
+            };
+            
+            let existingProduct = cart.find(item => item.name === productName);
+            
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+                existingProduct.subtotal = existingProduct.quantity * existingProduct.price;
+            } else {
+                cart.push(product);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(productName + " added to cart! Price: INR " + price);
+            event.preventDefault();
+        }
+        function toggleWishlist(heartIcon) {
+            const itemId = heartIcon.getAttribute('data-item-id');
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+            // Check if item is already in the wishlist
+            if (wishlist.includes(itemId)) {
+                // Remove the item from the wishlist
+                wishlist = wishlist.filter(item => item !== itemId);
+                heartIcon.classList.remove('filled'); // Unfill the heart
+            } else {
+                // Add the item to the wishlist
+                wishlist.push(itemId);
+                heartIcon.classList.add('filled'); // Fill the heart
+            }
+
+            // Update the wishlist in local storage
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        }
+
+        
+    </script>
+</body>
+</html>
+
+

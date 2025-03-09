@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+        .order-details {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #0e5830;
+            font-size: 24px;
+            text-align: center;
+        }
+        .detail-item {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="order-details">
+        <h2>Order Confirmation</h2>
+        <div id="order-info"></div>
+    </div>
+
+    <script>
+        // Retrieve XML data from sessionStorage
+        const xmlData = sessionStorage.getItem('orderData');
+        if (xmlData) {
+            // Parse XML data
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlData, "application/xml");
+
+            // Extract and display details
+            const orderInfoDiv = document.getElementById('order-info');
+            const fields = ['contact', 'houseFlatNo', 'area', 'landmark', 'city', 'pincode', 'paymentMethod'];
+
+            fields.forEach(field => {
+                const element = xmlDoc.getElementsByTagName(field)[0];
+                if (element) {
+                    const value = element.textContent;
+                    const div = document.createElement('div');
+                    div.className = 'detail-item';
+                    div.innerHTML = `<strong>${field.replace(/([A-Z])/g, ' $1')}: </strong> ${value}`;
+                    orderInfoDiv.appendChild(div);
+                }
+            });
+        } else {
+            document.getElementById('order-info').textContent = "No order data found.";
+        }
+    </script>
+</body>
+</html>

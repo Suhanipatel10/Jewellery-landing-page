@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Section - Evolve Skin</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Include your existing stylesheet here -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background-color: #f0efec;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+        .header1{
+            text-align: center;
+            background-color: #d4e5c6;
+            color: black;
+            font-size: 20px;
+            padding-top: 0.02px;
+            padding-bottom: 0.02px;
+        }
+        .header3{
+            display: flex;  
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f0efec;
+        }
+        .logo img {
+            height: 80px;
+            width: 110%;
+        }
+        .nav {
+            display: flex;
+            list-style: none;
+            padding: 10px;
+            margin-left: 50px;
+            margin-right: auto;
+        }
+        .nav > li {
+            position: relative;
+            margin-left: 20px;
+        }
+        .nav a {
+            font-size: 17px;
+            font-family: 'Arial';
+            text-decoration: none;
+            color: #080000;
+            text-transform: uppercase;
+            padding: 10px;
+            position: relative;
+            display: block;
+            transition: color 0.3s;
+        }
+        .nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: #117548;
+            transition: width 0.3s;
+        }
+        .nav a:hover::after {
+            width: 100%;
+        }
+        .nav a:hover {
+            color: #278f60;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #444;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-menu a {
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #555;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            white-space: nowrap;
+        }
+        .dropdown-menu a {
+            color: #0d0000;
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+        .nav > li:hover .dropdown-menu {
+            display: block;
+        }
+        .nav-right {
+            display: flex;
+            gap: 30px;
+            margin-right: 40px;
+        }
+        .nav-right a {
+            color: black; /* Add this line */
+            text-decoration: none;
+            font-size:25px;
+            padding: 5px;
+        }
+        .nav-icon {
+            font-size: 30px; 
+            stroke-width: 1;
+        }
+        .faq-section {
+            background-color: #d4e5c6;
+            padding: 40px;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .faq-heading {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 4px;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .faq-item {
+            background-color: #d4e5c6;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            width: 100%;
+            background-color: var(--nav-bar);
+            color: var(--text-color);
+            padding: 15px;
+            font-size: 22px;
+            font-weight: 600;
+            text-align: left;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background-color: rgba(198, 248, 189, 0.8);
+        }
+
+        .faq-toggle {
+            font-size: 28px;
+            color: var(--text-color);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 20px;
+            font-size: 18px;
+            color: var(--text-color);
+            border-top: 1px solid rgb(149, 215, 165);
+        }
+
+        .faq-answer p {
+            margin: 0;
+        }
+
+        .active .faq-answer {
+            display: block;
+        }
+
+        .active .faq-toggle {
+            transform: rotate(45deg);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .submit-question {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .submit-question input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .submit-question button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #ff9b00;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .submit-question button:hover {
+            background-color: #ff7a00;
+        }
+        .footer {
+            background-color: #070000;
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+        }
+        .footer .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1700px;
+            margin: 0 auto;
+        }
+        .footer .footer-content div {
+            flex: 1;
+            margin: 10px;
+            min-width: 200px;
+        }
+        .footer .footer-content h3 {
+            margin-top: 0;
+            font-size: 20px;
+            color: #0e5830;
+        }
+        .footer .footer-content p, .footer .footer-content a {
+            font-size: 20px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .footer .footer-content a {
+            display: block;
+            margin: 5px 0;
+        }
+        .footer .footer-logo {
+            text-align: center;
+        }
+        .footer .footer-logo img {
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header1">
+        <p>Free shipping on all orders above 1500/-</p>
+    </header>
+    <header class="header3">
+        <div class="logo">
+            <img src="l1.png" alt="Jewellery Store Logo">
+        </div>
+        <nav class="nav">
+            <a href="home.html">Home</a>
+            <li>
+                <a href="#">Items</a>
+                <div class="dropdown-menu">
+                    <a href="rings_container.html">Rings</a>
+                    <a href="earrings_container.html">earrings</a>
+                    <a href="bracelets_container.html">Bracelets</a>
+                    <a href="necklaces_container.html">Necklace</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">Giftings</a>
+                <div class="dropdown-menu">
+                    <a href="gift_boxes.html">Gift Boxes</a>
+                    <a href="pairs.html">Pair Things</a>
+                </div>
+            </li>
+            <li>
+                <a href="sets.html">Sets</a>
+            </li>
+            <li>
+                <a href="login.php">Login</a>
+            </li>
+        </nav>
+        <div class="nav-right">
+            
+            <a href="cart.html" class="nav-icon">
+                <i class="fa fa-shopping-cart"></i>
+            </a>
+            <a href="dashboard.html" class="nav-icon">
+                <i class="fa fa-user"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h1 class="faq-heading">Frequently Asked Questions</h1>
+        <div class="faq-container">
+            <div class="faq-item">
+                <button class="faq-question">
+                    What is Evolve Skin?
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Evolve Skin is a skincare company offering a wide range of products that cater to various skin types, helping you achieve a healthy and glowing complexion.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    How do I choose the right skincare product for my skin?
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>You can explore our product categories based on skin concerns, such as hydration, acne control, and anti-aging, and choose products that best suit your skin type.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    What are the ingredients used in your products?
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>All our products are made from natural ingredients and are free from harmful chemicals like parabens and sulfates. You can view the full list of ingredients on each product page.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    Do you offer international shipping?
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes, we ship internationally. Shipping fees and delivery times vary depending on the destination.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question Submission Form -->
+        <div class="submit-question">
+            <h2>Have a question? Ask us!</h2>
+            <input type="text" id="user-question" placeholder="Type your question here..." required>
+            <button id="submit-question">Submit</button>
+        </div>
+    </section>
+    
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="logo2.png" alt="Jewelry Store Footer Logo">
+            </div>
+            <div>
+                <h3>Contact Us</h3>
+                <p>Email: info@jewelrystore.com</p>
+                <p>Phone: +123 456 7890</p>
+            </div>
+            <div>
+                <h3>Customer Service</h3>
+                <a href="faq.html">FAQs</a>
+                <a href="return.html">Return Policy</a>
+                <a href="shipping.html">Shipping Information</a>
+            </div>
+            <div>
+                <h3>Follow Us</h3>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // JavaScript to toggle FAQ answers
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+
+                // Toggle active class
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // JavaScript to handle question submission
+        document.getElementById('submit-question').addEventListener('click', () => {
+            const userQuestion = document.getElementById('user-question').value;
+
+            if (userQuestion) {
+                alert("Question submitted successfully: " + userQuestion);
+                document.getElementById('user-question').value = ''; // Clear input field
+            } else {
+                alert("Please enter a question before submitting.");
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Allura&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background-color: #f0efec;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+        .header1{
+            text-align: center;
+            background-color: #d4e5c6;
+            color: black;
+            font-size: 20px;
+            padding-top: 0.02px;
+            padding-bottom: 0.02px;
+        }
+        .header3{
+            display: flex;  
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f0efec;
+        }
+        .logo img {
+            height: 80px;
+            width: 110%;
+        }
+        .nav {
+            display: flex;
+            list-style: none;
+            padding: 10px;
+            margin-left: 50px;
+            margin-right: auto;
+        }
+        .nav > li {
+            position: relative;
+            margin-left: 20px;
+        }
+        .nav a {
+            font-size: 17px;
+            font-family: 'Arial';
+            text-decoration: none;
+            color: #080000;
+            text-transform: uppercase;
+            padding: 10px;
+            position: relative;
+            display: block;
+            transition: color 0.3s;
+        }
+        .nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: #117548;
+            transition: width 0.3s;
+        }
+        .nav a:hover::after {
+            width: 100%;
+        }
+        .nav a:hover {
+            color: #278f60;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #444;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-menu a {
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #555;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            white-space: nowrap;
+        }
+        .dropdown-menu a {
+            color: #0d0000;
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+        .nav > li:hover .dropdown-menu {
+            display: block;
+        }
+        .nav-right {
+            display: flex;
+            gap: 30px;
+            margin-right: 40px;
+        }
+        .nav-right a {
+            color: black; /* Add this line */
+            text-decoration: none;
+            font-size:25px;
+            padding: 5px;
+        }
+        .nav-icon {
+            font-size: 30px; 
+            stroke-width: 1;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Header styling */
+        header h1 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        header .welcome-message {
+            font-size: 1.2em;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        /* User card styling */
+        .user-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .user-card:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .user-info p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .user-info strong {
+            color: #555;
+        }
+
+        /* Logout button styling */
+        .logout-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #ff6b6b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #ff5252;
+        }
+        .order-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #ff6b6b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .order-btn:hover {
+            background-color: #ff5252;
+        }
+    </style>
+</head>
+<body>
+    <header class="header1">
+        <p>Free shipping on all orders above 1500/-</p>
+    </header>
+    <header class="header3">
+        <div class="logo">
+            <img src="l1.png" alt="Jewellery Store Logo">
+        </div>
+        <nav class="nav">
+            <a href="home.html">Home</a>
+            <li>
+                <a href="#">Items</a>
+                <div class="dropdown-menu">
+                    <a href="rings_container.html">Rings</a>
+                    <a href="earrings_container.html">earrings</a>
+                    <a href="bracelets_container.html">Bracelets</a>
+                    <a href="necklaces_container.html">Necklace</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">Giftings</a>
+                <div class="dropdown-menu">
+                    <a href="gift_boxes.html">Gift Boxes</a>
+                    <a href="pairs.html">Pair Things</a>
+                </div>
+            </li>
+            <li>
+                <a href="sets.html">Sets</a>
+            </li>
+            <li>
+                <a href="login.php">Login</a>
+            </li>
+        </nav>
+        <div class="nav-right">
+            <a href="cart.html" class="nav-icon">
+                <i class="fa fa-shopping-cart"></i>
+            </a>
+            <a href="dashboard.html" class="nav-icon">
+                <i class="fa fa-user"></i>
+            </a>
+        </div>
+    </header>
+    <div class="dashboard-container">
+        <header>
+            <h1>Welcome to Your Dashboard</h1>
+            <p class="welcome-message">Here’s a quick overview of your account details.</p>
+        </header>
+        <div class="user-card">
+            <div class="user-info">
+                <p><strong>Name:</strong> <span id="name"></span></p>
+                <p><strong>Email:</strong> <span id="email"></span></p>
+                <p><strong>Phone:</strong> <span id="phone"></span></p>
+                <p><strong>Birthdate:</strong> <span id="birthdate"></span></p>
+            </div>
+            <button class="logout-btn" onclick="logout()">Log Out</button>
+            <button class="order-btn" onclick="window.location.href='order-confirmation.html'">order receipt</button>
+
+            
+        </div>
+    </div>
+    <script>
+        // Fetch user data and display it on the dashboard
+        async function fetchUserData() {
+            try {
+                const response = await fetch('get_user_data.php');
+                const data = await response.json();
+
+                if (data.error) {
+                    console.error(data.error);
+                    alert("An error occurred: " + data.error);
+                } else {
+                    // Display user data in dashboard if logged in
+                    document.getElementById("name").textContent = data.name;
+                    document.getElementById("email").textContent = data.email;
+                    document.getElementById("phone").textContent = data.number;
+                    document.getElementById("birthdate").textContent = data.birthdate;
+                }
+            } catch (error) {
+                console.error("Fetch error:", error);
+                alert("Failed to load user data.");
+            }
+        }
+
+        function logout() {
+            fetch('logout.php', { method: 'POST' })
+                .then(() => {
+                    alert("You have successfully logged out.");
+                    window.location.href = "/web_tech/login.php";
+                })
+                .catch(error => console.error("Logout error:", error));
+        }
+
+        // Fetch user data when the page loads
+        window.onload = fetchUserData;
+
+
+
+    </script>
+</body>
+</html>

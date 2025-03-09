@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Evolve Skin</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Allura&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background-color: #f0efec;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+        .header1{
+            text-align: center;
+            background-color: #d4e5c6;
+            color: black;
+            font-size: 20px;
+            padding-top: 0.02px;
+            padding-bottom: 0.02px;
+        }
+        .header3{
+            display: flex;  
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f0efec;
+        }
+        .logo img {
+            height: 80px;
+            width: 110%;
+        }
+        .nav {
+            display: flex;
+            list-style: none;
+            padding: 10px;
+            margin-left: 50px;
+            margin-right: auto;
+        }
+        .nav > li {
+            position: relative;
+            margin-left: 20px;
+        }
+        .nav a {
+            font-size: 17px;
+            font-family: 'Arial';
+            text-decoration: none;
+            color: #080000;
+            text-transform: uppercase;
+            padding: 10px;
+            position: relative;
+            display: block;
+            transition: color 0.3s;
+        }
+        .nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: #117548;
+            transition: width 0.3s;
+        }
+        .nav a:hover::after {
+            width: 100%;
+        }
+        .nav a:hover {
+            color: #278f60;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #444;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-menu a {
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #555;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            white-space: nowrap;
+        }
+        .dropdown-menu a {
+            color: #0d0000;
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+        .nav > li:hover .dropdown-menu {
+            display: block;
+        }
+        .nav-right {
+            display: flex;
+            gap: 30px;
+            margin-right: 40px;
+        }
+        .nav-right a {
+            color: black; /* Add this line */
+            text-decoration: none;
+            font-size: 25px;
+            padding: 5px;
+        }
+        .nav-icon {
+            font-size: 30px; 
+            stroke-width: 1;
+        }
+
+        #wishlist-container {
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Soft shadow for the container */
+        }
+
+        #wishlist-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #wishlist-table thead {
+            background-color: #c7dbb5; /* Header background color */
+            color: black;
+        }
+
+        #wishlist-table th, #wishlist-table td {
+            padding: 15px;
+            border: 1px solid #ddd; /* Light border for table cells */
+            text-align: center;
+        }
+
+        #wishlist-table tr:nth-child(even) {
+            background-color: #f9f9f9; /* Light gray for even rows */
+        }
+
+        #wishlist-table tr:hover {
+            background-color: #f1e5e1; /* Slightly darker on hover */
+        }
+
+        /* Product Images */
+        .cart-product-image {
+            width: 100px; /* Adjust size as needed */
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Total Amount */
+        #total-amount {
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+            color: #c38e70; /* Accent color for total amount */
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header1">
+        <p>Free shipping on all orders above 1500/-</p>
+    </header>
+    <header class="header3">
+        <div class="logo">
+            <img src="l1.png" alt="Jewellery Store Logo">
+        </div>
+        <nav class="nav">
+            <a href="home.html">Home</a>
+            <li>
+                <a href="#">Rings</a>
+                <div class="dropdown-menu">
+                    <a href="#">Necklaces</a>
+                    <a href="#">Bracelets</a>
+                    <a href="#">Rings</a>
+                    <a href="#">Earrings</a>
+                    <a href="#">Anklets</a>
+                    <a href="#">Watches</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">Bracelets</a>
+                <div class="dropdown-menu">
+                    <a href="#">Necklaces</a>
+                    <a href="#">Bracelets</a>
+                    <a href="#">Rings</a>
+                    <a href="#">Earrings</a>
+                    <a href="#">Anklets</a>
+                    <a href="#">Watches</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">Necklaces</a>
+                <div class="dropdown-menu">
+                    <a href="#">Necklaces</a>
+                    <a href="#">Bracelets</a>
+                    <a href="#">Rings</a>
+                    <a href="#">Earrings</a>
+                    <a href="#">Anklets</a>
+                    <a href="#">Watches</a>
+                </div>
+            </li>
+            <li>
+                <a href="earrings_container.html">Earrings</a>
+                <div class="dropdown-menu">
+                    <a href="#">Necklaces</a>
+                    <a href="#">Bracelets</a>
+                    <a href="#">Rings</a>
+                    <a href="#">Earrings</a>
+                    <a href="#">Anklets</a>
+                    <a href="#">Watches</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">Giftings</a>
+                <div class="dropdown-menu">
+                    <a href="#">Gift Boxes</a>
+                    <a href="#">Pair Things</a>
+                    <a href="#">Customized Gifts</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">Offers</a>
+                <div class="dropdown-menu">
+                    <a href="#">Seasonal Offers</a>
+                    <a href="#">Clearance</a>
+                    <a href="#">Limited Editions</a>
+                </div>
+            </li>
+            <li>
+                <a href="login.html">Login</a>
+            </li>
+        </nav>
+        <div class="nav-right">
+            <a href="#" class="nav-icon">
+                <i class="fa fa-search"></i>
+            </a>
+            <a href="wishlist.html" class="nav-icon">
+                <i class="fa fa-heart"></i>
+            </a>
+            <a href="cart.html" class="nav-icon">
+                <i class="fa fa-shopping-cart"></i>
+            </a>
+            <a href="#" class="nav-icon">
+                <i class="fa fa-user"></i>
+            </a>
+        </div>
+    </header>
+    <hr style="border: 1px solid #ddd; margin: 0px;">
+    <p style="font-size: 40px; margin-left: 30px; margin-top: 10px; margin-bottom: 10px; font-family: 'Open Sans';">Shopping cart</p>
+    <hr style="border: 1px solid #ddd; margin: 20px 0;">
+    <!-- Create a wishlist container with a table to display wishlist items -->
+        <div id="wishlist-container">
+            <table id="wishlist-table">
+            <thead>
+                <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Price (INR)</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="wishlist-items">
+                <!-- Wishlist items will be dynamically added here -->
+            </tbody>
+            </table>
+        </div>
+    
+    <script>
+
+        // Function to update the wishlist display
+        function updateWishlist() {
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        let wishlistItemsContainer = document.getElementById('wishlist-items');
+        wishlistItemsContainer.innerHTML = ''; // Clear existing items
+
+        wishlist.forEach(item => {
+            wishlistItemsContainer.innerHTML += `
+            <tr>
+                <td><img src="${item.image}" alt="${item.name}" width="200" height="200"></td>
+                <td>${item.name}</td>
+                <td>${item.description}</td>
+                <td>${item.type}</td>
+                <td>INR ${item.price.toFixed(2)}</td>
+                <td><button onclick="removeFromWishlist('${item.name}')">Remove</button></td>
+            </tr>
+            `;
+        });
+        }
+        function removeFromWishlist(productName) {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            wishlist = wishlist.filter(item => item.name !== productName);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            updateWishlist();
+        }
+
+        // Initialize the wishlist on page load
+        updateWishlist();
+    </script>
+    <p><a href="home.html"><u><h1 align="center">Continue Shopping</h1></u></a></p>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewellery Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background-color: #f0efec;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+        .header1{
+            text-align: center;
+            background-color: #d4e5c6;
+            color: black;
+            font-size: 20px;
+            padding-top: 0.02px;
+            padding-bottom: 0.02px;
+        }
+        .header3{
+            display: flex;  
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f0efec;
+        }
+        .logo img {
+            height: 80px;
+            width: 110%;
+        }
+        .nav {
+            display: flex;
+            list-style: none;
+            padding: 10px;
+            margin-left: 50px;
+            margin-right: auto;
+        }
+        .nav > li {
+            position: relative;
+            margin-left: 20px;
+        }
+        .nav a {
+            font-size: 17px;
+            font-family: 'Arial';
+            text-decoration: none;
+            color: #080000;
+            text-transform: uppercase;
+            padding: 10px;
+            position: relative;
+            display: block;
+            transition: color 0.3s;
+        }
+        .nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background: #117548;
+            transition: width 0.3s;
+        }
+        .nav a:hover::after {
+            width: 100%;
+        }
+        .nav a:hover {
+            color: #278f60;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #444;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-menu a {
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #555;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            white-space: nowrap;
+        }
+        .dropdown-menu a {
+            color: #0d0000;
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+        .nav > li:hover .dropdown-menu {
+            display: block;
+        }
+        .nav-right {
+            display: flex;
+            gap: 30px;
+            margin-right: 40px;
+        }
+        .nav-right a {
+            color: black; /* Add this line */
+            text-decoration: none;
+            font-size: 25px;
+            padding: 5px;
+        }
+        .nav-icon {
+            font-size: 30px; 
+            stroke-width: 1;
+        }
+
+        #cart-container {
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Soft shadow for the container */
+        }
+
+        /* Cart Table */
+        #cart-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #cart-table thead {
+            background-color: #c7dbb5; /* Header background color */
+            color: black;
+        }
+
+        #cart-table th, #cart-table td {
+            padding: 15px;
+            border: 1px solid #ddd; /* Light border for table cells */
+            text-align: center;
+        }
+
+        #cart-table tr:nth-child(even) {
+            background-color: #f1e5e1; /* Light gray for even rows */
+        }
+
+        /* Product Images */
+        .cart-product-image {
+            width: 200px; /* Adjust size as needed */
+            height: 250px;
+            border-radius: 5px;
+        }
+
+        /* Total Amount */
+        #total-amount {
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+            color: #c38e70; /* Accent color for total amount */
+        }
+        #place-order-btn{
+            display: block;
+            margin: 0 auto;
+            padding: 20px;
+            justify-content: center;
+            background-color: #c38e70;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header1">
+        <p>Free shipping on all orders above 1500/-</p>
+    </header>
+    <header class="header3">
+        <div class="logo">
+            <img src="l1.png" alt="Jewellery Store Logo">
+        </div>
+        <nav class="nav">
+            <a href="home.html">Home</a>
+            <li>
+                <a href="#">Items</a>
+                <div class="dropdown-menu">
+                    <a href="rings_container.html">Rings</a>
+                    <a href="earrings_container.html">earrings</a>
+                    <a href="bracelets_container.html">Bracelets</a>
+                    <a href="necklaces_container.html">Necklace</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">Giftings</a>
+                <div class="dropdown-menu">
+                    <a href="gift_boxes.html">Gift Boxes</a>
+                    <a href="pairs.html">Pair Things</a>
+                </div>
+            </li>
+            <li>
+                <a href="sets.html">Sets</a>
+            </li>
+            <li>
+                <a href="login.php">Login</a>
+            </li>
+        </nav>
+        <div class="nav-right">
+            
+            <a href="cart.html" class="nav-icon">
+                <i class="fa fa-shopping-cart"></i>
+            </a>
+            <a href="dashboard.html" class="nav-icon">
+                <i class="fa fa-user"></i>
+            </a>
+        </div>
+    </header>
+    <hr style="border: 1px solid #ddd; margin: 0px;">
+    <p style="font-size: 40px; margin-left: 30px; margin-top: 10px; margin-bottom: 10px; font-family: 'Open Sans';">Shopping cart</p>
+    <hr style="border: 1px solid #ddd; margin: 20px 0;">
+    <div id="cart-container">
+        <table id="cart-table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Type</th>
+                    <th>Price (INR)</th>
+                    <th>Quantity</th>
+                    <th>Subtotal (INR)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </tbody>
+        </table>
+        <h2 id="total-amount">Total: INR 0.00</h2>
+        <button id="place-order-btn">Place Order</button>
+    </div>
+    
+    <script>
+       
+        function updateCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItemsContainer = document.getElementById('cart-items');
+            let totalAmount = 0;
+            
+            cartItemsContainer.innerHTML = ''; // Clear existing items
+    
+            cart.forEach(item => {
+                totalAmount += item.subtotal;
+    
+                cartItemsContainer.innerHTML += `
+                    <tr>
+                        <td><img src="${item.image}" alt="${item.name}" class="cart-product-image"></td>
+                        <td>${item.name}</td>
+                        <td>${item.type}</td>
+                        <td>INR ${item.price.toFixed(2)}</td>
+                        <td>
+                            <button onclick="changeQuantity('${item.name}', -1)">-</button>
+                            ${item.quantity}
+                            <button onclick="changeQuantity('${item.name}', 1)">+</button>
+                        </td>
+                        <td>INR ${item.subtotal.toFixed(2)}</td>
+                        <td><button onclick="removeFromCart('${item.name}')">Remove</button></td>
+                    </tr>
+                `;
+            });
+    
+            document.getElementById('total-amount').textContent = `Total: INR ${totalAmount.toFixed(2)}`;
+        }
+    
+        function changeQuantity(productName, change) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let product = cart.find(item => item.name === productName);
+    
+            if (cart.length >= 5 && change > 0) {
+                alert("You have reached the maximum number of items in your cart.");
+                return;
+            }
+    
+            if (product) {
+                product.quantity += change;
+                if (product.quantity <= 0) {
+                    removeFromCart(productName);
+                    return;
+                }
+                product.subtotal = product.quantity * product.price;
+            } else {
+                if (cart.length >= 5) {
+                    alert("You have reached the maximum number of items in your cart.");
+                    return;
+                }
+                // Add new item to cart
+                cart.push({
+                    name: productName,
+                    type: getType(productName), // Assuming you have a function to get the type
+                    quantity: 1,
+                    price: getPrice(productName), // Assuming you have a function to get the price
+                    subtotal: getPrice(productName),
+                    image: getImage(productName) // Assuming you have a function to get the image
+                });
+            }
+    
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCart();
+        }
+    
+        function removeFromCart(productName) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(item => item.name !== productName);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCart();
+        }
+        document.getElementById('place-order-btn').addEventListener('click', function() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Check if the cart is empty
+            if (cart.length === 0) {
+                alert("Your cart is empty. Please add items to the cart.");
+                return;
+            }
+
+            // Check if each item has a name and type
+            cart.forEach(item => console.log('Cart item:', item));
+
+            const totalAmount = calculateTotalAmount(cart);
+
+            fetch('place_order.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cart: cart, totalAmount: totalAmount }) // Send cart and total amount
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Order placed successfully!");
+                    localStorage.removeItem('cart');
+                    window.location.href = 'order_confirmation.html';
+                } else if (data.error === 'not_logged_in') {
+                    alert("You are not logged in. Please log in to place an order.");
+                    window.location.href = 'login.php';
+                } else {
+                    alert("Error placing order: " + (data.error || "Unknown error"));
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred while placing your order.");
+            });
+        });
+
+
+        // Calculate the total amount from the cart
+        function calculateTotalAmount(cart) {
+            return cart.reduce((total, item) => total + item.subtotal, 0);
+        }
+
+        // Initialize the cart on page load
+        updateCart();
+    </script>
+    <p><a href="home.html"><u><h1 align="center">Continue Shopping</h1></u></a></p>
+</body>
+</html>
